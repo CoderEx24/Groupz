@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import beans.Group;
 import beans.Groupz;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -74,7 +73,7 @@ public class EditGroupController {
     			Optional<String> student = studentChoiceDialog.showAndWait();
     			student.ifPresent(val2 -> Groupz.addStudentToGroup(val2, theGroup));
     			members.clear();
-    			members.addAll(Groupz.getStudentsOfGroup(theGroup));
+    			members.addAll(Groupz.getMembersOfGroup(theGroup));
     			
     		} else if (val.equals("Task")) {
     			try {
@@ -123,7 +122,7 @@ public class EditGroupController {
     		result.ifPresent(val -> Groupz.addStudentToGroup(selectedStudent, val));
     		
     	} else if (selectedTask != null)
-    		Groupz.deleteGroupTask(theGroup, selectedTask);
+    		Groupz.deleteTaskFromGroup(theGroup, selectedTask);
     	
     }
 
@@ -142,7 +141,7 @@ public class EditGroupController {
 //
     public void setGroup(String g) {
     	theGroup = g;
-    	members.setAll(Groupz.getStudentsOfGroup(theGroup));
+    	members.setAll(Groupz.getMembersOfGroup(theGroup));
     	tasks.setAll(Groupz.getTasksOfGroup(theGroup));
     	
     	

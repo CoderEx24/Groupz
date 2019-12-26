@@ -67,6 +67,11 @@ public class Student {
 		
 	}
 	
+	public String getEmail() {
+		return email;
+		
+	}
+	
 	public Task getTask(String t) {
 		return tasks.getOrDefault(t, null);
 		
@@ -94,9 +99,17 @@ public class Student {
 		
 	}
 	
-	public void deleteTask(Task t) {
-		if (tasks.containsValue(t))
-			tasks.remove(t.getName());
+	public void deleteTask(Task val) {
+		if (tasks.containsValue(val)) {
+			currentTask.ifPresent(task -> {
+				if (val == task) {
+					currentTask = Optional.empty();
+					
+				}
+				
+			});
+			tasks.remove(val.getName());
+		}
 		
 	}
 	
@@ -108,6 +121,11 @@ public class Student {
 	
 	public String toString() {
 		return name + "-" + groupName + "-" + className;
+		
+	}
+
+	public void setEmail(String newEmail) {
+		email = newEmail;
 		
 	}
 

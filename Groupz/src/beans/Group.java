@@ -104,6 +104,11 @@ public class Group {
 	}
 	
 	public void removeTask(Task val) {
+		currentTask.ifPresent(task -> {
+			if (val == task) 
+				currentTask = Optional.empty();
+			
+		});
 		tasks.remove(val.getName());
 		
 	}

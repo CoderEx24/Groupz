@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import beans.Groupz;
-import beans.Task.Grade;
 
 public class AddTaskController {
 
@@ -40,9 +39,9 @@ public class AddTaskController {
     	String taskDescription = descriptionField.getText();
     	boolean isCurrent = isCurrentField.isSelected();
     	if (choice.equals("student"))
-    		Groupz.createStudentTask(studentRadioButton.getText(), taskName, taskDescription, Grade.UNRATED, isCurrent, true);
+    		Groupz.createTaskForStudent(studentRadioButton.getText(), taskName, taskDescription, beans.Task.Grade.UNRATED, isCurrent, true);
     	else
-    		Groupz.createGroupTask(groupRadioButton.getText(), taskName, taskDescription, Grade.UNRATED, isCurrent);
+    		Groupz.createTaskForGroup(groupRadioButton.getText(), taskName, taskDescription, beans.Task.Grade.UNRATED, isCurrent, true);
     	
     	((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
     }

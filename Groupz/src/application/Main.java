@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 
 import java.io.IOException;
-
 import beans.Groupz;
 
 public class Main extends Application {
@@ -24,13 +23,13 @@ public class Main extends Application {
 			Groupz.init();
 			Groupz.login("kareemhacker123321@gmail.com", "crxdharvvnozdzjw");
 
-		} catch(IOException e) {
+		} catch(Exception e) {
 			Alert err = new Alert(Alert.AlertType.ERROR);
 			err.setTitle("Groupz");
 			err.setHeaderText("An error ouccred");
 			err.setContentText("The application failed to read some files\n" +
 			"It is possible that the data got courrpted");
-			err.show();
+			err.showAndWait();
 			
 		}
 		

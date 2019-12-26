@@ -100,7 +100,7 @@ public class MainController {
     		
     	});
     	
-    	classesShowComboBox.setItems(Groupz.getClassesList());
+    	classesShowComboBox.setItems(Groupz.getClasses());
     	if (classesShowComboBox.getItems().size() > 0) {
     		classesShowComboBox.getSelectionModel().select(0);
     		onClassChange(null);
@@ -124,7 +124,7 @@ public class MainController {
 			dialog.initModality(Modality.APPLICATION_MODAL);
 			dialog.setTitle("Groupz - Add a student");
 			dialog.setScene(scene);
-			dialog.show();
+			dialog.showAndWait();
 			mainTable.refresh();
 			
 		} catch (IOException e) {
