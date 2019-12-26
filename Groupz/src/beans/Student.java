@@ -8,6 +8,7 @@ public class Student {
 	private String name;
 	private String className;
 	private String groupName;
+	private String email;
 	private HashMap<String, Task> tasks;
 	private Optional<Task> currentTask;
 	
@@ -15,15 +16,17 @@ public class Student {
 		name = null;
 		className = null;
 		groupName = null;
+		email = null;
 		tasks = new HashMap<String, Task>();
 		currentTask = Optional.empty();
 		
 	}
 	
-	public Student(String n, String c, String g) {
+	public Student(String n, String g, String c, String e) {
 		name = n;
 		className = c;
 		groupName = g;
+		email = e;
 		tasks = new HashMap<String, Task>();
 		currentTask = Optional.empty();
 		
@@ -84,14 +87,27 @@ public class Student {
 		
 	}
 	
-	public void addTask(Task t) {
-		tasks.put(t.getName(), t);
+	public void addTask(Task val) {
+		tasks.put(val.getName(), val);
+		if (val.isCurrent())
+			currentTask = Optional.of(val);
 		
 	}
 	
 	public void deleteTask(Task t) {
 		if (tasks.containsValue(t))
 			tasks.remove(t.getName());
+		
+	}
+	
+	public void gradeCurrentTask(Task.Grade grade) {
+		currentTask.ifPresent(task -> task.setGrade(grade));
+		currentTask = Optional.empty();
+		
+	}
+	
+	public String toString() {
+		return name + "-" + groupName + "-" + className;
 		
 	}
 

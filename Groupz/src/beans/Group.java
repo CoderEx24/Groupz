@@ -55,7 +55,7 @@ public class Group {
 		
 	}
 	
-	public Student getMemeber(String val) {
+	public Student getMember(String val) {
 		return memebers.getOrDefault(val, null);
 		
 	}
@@ -74,7 +74,7 @@ public class Group {
 		
 	}
 	
-	public HashMap<String, Student> getMemebers() {
+	public HashMap<String, Student> getMembers() {
 		return memebers;
 		
 	}
@@ -84,23 +84,37 @@ public class Group {
 		
 	}
 	
-	public void addMemeber(Student s) {
+	public void addMember(Student s) {
 		memebers.put(s.getName(), s);
 		
 	}
 	
 	public void addTask(Task t) {
 		tasks.put(t.getName(), t);
+		if (t.isCurrent() && !currentTask.isPresent())
+			currentTask = Optional.of(t);
+		else if (t.isCurrent())
+			t.setIsCurrent(false);
 		
 	}
 	
-	public void removeMemeber(Student val) {
+	public void removeMember(Student val) {
 		memebers.remove(val.getName());
 		
 	}
 	
 	public void removeTask(Task val) {
 		tasks.remove(val.getName());
+		
+	}
+	
+	public void gradeCurrentTask(Task.Grade grade) {
+		currentTask.ifPresent(task -> {
+			task.setGrade(grade);
+			task.setIsCurrent(false);
+			
+		});
+		currentTask = Optional.empty();
 		
 	}
 	

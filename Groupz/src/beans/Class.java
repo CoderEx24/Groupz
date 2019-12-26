@@ -60,7 +60,7 @@ public class Class {
 	public void addGroup(Group val, boolean withStudents) {
 		groups.put(val.getName(), val);
 		if (withStudents)
-			val.getMemebers().forEach((studentName, student) -> students.put(studentName, student));
+			val.getMembers().forEach((studentName, student) -> students.put(studentName, student));
 		
 	}
 	
@@ -72,7 +72,7 @@ public class Class {
 	public void removeGroup(Group val, boolean withStudents) {
 		groups.remove(val.getName());
 		if (withStudents)
-			val.getMemebers().forEach((name, ignore) -> students.remove(name));
+			val.getMembers().forEach((name, ignore) -> students.remove(name));
 		
 	}
 

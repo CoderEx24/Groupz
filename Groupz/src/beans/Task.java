@@ -17,10 +17,10 @@ public class Task {
 		
 	}
 	
-	public Task(String n, String d, Grade g, boolean i) {
+	public Task(String n, String d, boolean i) {
 		name = n;
 		description = d;
-		grade = g;
+		grade = Grade.UNRATED;
 		isCurrent = i;
 		
 	}
