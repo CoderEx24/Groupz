@@ -25,6 +25,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.collections.transformation.FilteredList;
@@ -116,6 +117,25 @@ public class MainController {
     }
     
     @FXML
+    void onSearch(KeyEvent evt) {
+    	for (int i = 0; i < 1; i++)  {
+    		final String query = searchQueryField.getText();
+    		if (query.isEmpty())
+    			filteredStudentsList.setPredicate(null);
+    		else
+    			filteredStudentsList.setPredicate(student -> {
+    				String[] tokens = student.split("-");
+    				String name = tokens[0];
+    				String groupName = tokens[1];
+    				String email = tokens[3];
+    				return name.contains(query) || groupName.contains(query) || email.contains(query);
+    				
+    			});
+    	
+    	}
+    }
+    
+    @FXML
     void addStudent(ActionEvent evt) {
     	try {
 			Parent root = FXMLLoader.load(getClass().getResource("assets/AddStudent.fxml"));
@@ -195,6 +215,34 @@ public class MainController {
     		
     	}
     	
+    }
+    
+    @FXML
+    void onGradeTask(ActionEvent evt) {
+    	String selected = mainTable.getSelectionModel().getSelectedItem();
+    	Optional.<String>ofNullable(selected).ifPresent(val -> {
+    		final String name = val.split("-")[0];
+    		final String groupName = val.split("-")[1];
+    		
+    		ChoiceDialog<String> whichChoice = new ChoiceDialog<String>(name, name, groupName);
+    		whichChoice.setTitle("Groupz");
+    		whichChoice.setHeaderText("Choose which one you will grade his current task");
+    		whichChoice.showAndWait().ifPresent(choice -> {
+    			ChoiceDialog<String> gradeDialog = new ChoiceDialog<String>("", "blue", "green", "yellow", "red");
+    			gradeDialog.setTitle("Groupz");
+    			gradeDialog.setHeaderText("Choose the grade");
+    			gradeDialog.showAndWait().ifPresent(grade -> {
+    				if (choice.equals(name))
+    					Groupz.gradeStudentCurrentTask(name, beans.Task.stringToGrade(grade));
+    				else
+    					Groupz.gradeGroupCurrentTask(groupName, beans.Task.stringToGrade(grade));
+    				
+    			});
+    			
+    		});
+    		
+    	});
+    	mainTable.refresh();
     }
     
     @FXML

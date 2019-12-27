@@ -234,6 +234,18 @@ public class Groupz {
 		
 	}
 	
+	public static boolean gradeStudentCurrentTask(String studentName, Task.Grade grade) {
+		Student theStudent = students.get(studentName);
+		return theStudent.gradeCurrentTask(grade);
+		
+	}
+	
+	public static boolean gradeGroupCurrentTask(String groupName, Task.Grade grade) {
+		Group theGroup = groups.get(groupName);
+		return theGroup.gradeCurrentTask(grade);
+		
+	}
+	
 	public static void mailTaskToStudent(String studentName, String taskName) {
 		Student theStudent = students.get(studentName);
 		Task theTask = theStudent.getTask(taskName);

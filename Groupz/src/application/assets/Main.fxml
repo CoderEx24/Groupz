@@ -96,7 +96,7 @@
                         </Tooltip>
                      </tooltip>
                   </Button>
-                  <Button fx:id="gradeTaskButton" mnemonicParsing="false" prefHeight="77.0" prefWidth="86.0">
+                  <Button fx:id="gradeTaskButton" mnemonicParsing="false" onAction="#onGradeTask" prefHeight="77.0" prefWidth="86.0">
                      <graphic>
                         <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -185,7 +185,7 @@
             <HBox alignment="CENTER" prefHeight="44.0" prefWidth="1200.0">
                <children>
                   <Label alignment="CENTER" prefHeight="51.0" prefWidth="87.0" text="Search about" />
-                  <TextField fx:id="searchQueryField" />
+                  <TextField fx:id="searchQueryField" onKeyTyped="#onSearch" />
                   <Separator orientation="VERTICAL" prefHeight="44.0" prefWidth="50.0" />
                   <Label alignment="CENTER" prefHeight="17.0" prefWidth="74.0" text="Show Class" />
                   <ComboBox fx:id="classesShowComboBox" onAction="#onClassChange" prefWidth="150.0" />

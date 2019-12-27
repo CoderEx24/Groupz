@@ -1,5 +1,6 @@
 package application;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -38,12 +39,16 @@ public class AddTaskController {
     	String taskName = nameField.getText();
     	String taskDescription = descriptionField.getText();
     	boolean isCurrent = isCurrentField.isSelected();
-    	if (choice.equals("student"))
-    		Groupz.createTaskForStudent(studentRadioButton.getText(), taskName, taskDescription, beans.Task.Grade.UNRATED, isCurrent, true);
-    	else
-    		Groupz.createTaskForGroup(groupRadioButton.getText(), taskName, taskDescription, beans.Task.Grade.UNRATED, isCurrent, true);
+    	Platform.runLater(() -> {
+    		if (choice.equals("student"))
+        		Groupz.createTaskForStudent(studentRadioButton.getText(), taskName, taskDescription, beans.Task.Grade.UNRATED, isCurrent, true);
+        	else
+        		Groupz.createTaskForGroup(groupRadioButton.getText(), taskName, taskDescription, beans.Task.Grade.UNRATED, isCurrent, true);
+        	
+    	});
     	
     	((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
+    	
     }
     
     @FXML

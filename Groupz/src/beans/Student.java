@@ -113,9 +113,15 @@ public class Student {
 		
 	}
 	
-	public void gradeCurrentTask(Task.Grade grade) {
-		currentTask.ifPresent(task -> task.setGrade(grade));
+	public boolean gradeCurrentTask(Task.Grade grade) {
+		boolean didHave = currentTask.isPresent();
+		currentTask.ifPresent(task -> {
+			task.setGrade(grade);
+			task.setIsCurrent(false);
+			
+		});
 		currentTask = Optional.empty();
+		return didHave;
 		
 	}
 	

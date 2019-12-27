@@ -55,6 +55,7 @@ public class EditStudentController {
     	theStudent = s;
     	String[] tokens = theStudent.split("-");
     	String studentClass = Groupz.getCurrentClass();
+    	tasksList.setItems(FXCollections.observableArrayList(Groupz.getTasksOfStudent(tokens[0])));
     	nameField.setText(tokens[0]);
     	groupField.setItems(FXCollections.observableArrayList(Groupz.getGroupsOfClass(studentClass)));
     	groupField.getSelectionModel().select(tokens[1]);
