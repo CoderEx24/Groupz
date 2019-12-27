@@ -120,7 +120,7 @@ public class Student {
 	}
 	
 	public String toString() {
-		return name + "-" + groupName + "-" + className;
+		return name + "-" + groupName + "-" + className + "-" + email;
 		
 	}
 

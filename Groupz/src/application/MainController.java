@@ -96,7 +96,7 @@ public class MainController {
     	
     	taskColumn.setCellValueFactory(obj -> {
     		String studentString = (String) obj.getValue();
-    		return new SimpleStringProperty(studentString.split("-")[2]);
+    		return new SimpleStringProperty(Groupz.getStudentCurrentTaskName(studentString.split("-")[0]));
     		
     	});
     	

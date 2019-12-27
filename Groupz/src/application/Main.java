@@ -21,7 +21,6 @@ public class Main extends Application {
 		Platform.setImplicitExit(false);
 		try {
 			Groupz.init();
-			Groupz.login("kareemhacker123321@gmail.com", "crxdharvvnozdzjw");
 
 		} catch(Exception e) {
 			Alert err = new Alert(Alert.AlertType.ERROR);
@@ -30,6 +29,9 @@ public class Main extends Application {
 			err.setContentText("The application failed to read some files\n" +
 			"It is possible that the data got courrpted");
 			err.showAndWait();
+			
+		} finally {
+			Groupz.login("groupz.no.reply@gmail.com", "wywzxuwlnknzwwtm");
 			
 		}
 		

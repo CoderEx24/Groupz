@@ -16,7 +16,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.Session;
 import javax.mail.Authenticator;
-import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 
 import javafx.collections.FXCollections;
@@ -173,7 +172,7 @@ public class Groupz {
 	}
 	
 	public static void login(String e, String p) {
-		email = p;
+		email = e;
 		password = p;
 		
 	}
@@ -187,7 +186,6 @@ public class Groupz {
 		groups.get(groupName).addMember(newStudent);
 		students.put(studentName, newStudent);
 		currentClass.ifPresent(val -> {
-			System.out.println("Has a current class");
 			if (val.getName().equals(className))
 				studentsTableList.add("" + newStudent);
 			
@@ -286,7 +284,7 @@ public class Groupz {
 			    Message message = new MimeMessage(sess);
 			    message.setFrom(new InternetAddress(email));
 			    message.setRecipient(Message.RecipientType.TO, new InternetAddress(studentEntry.getValue().getEmail()));
-			    message.setSubject(theTask.getName() + " - A new task assigned to you");
+			    message.setSubject(theTask.getName() + " - A new task assigned to your group");
 			    message.setText(theTask.getDescirption());
 			    Transport.send(message);
 		
@@ -321,6 +319,15 @@ public class Groupz {
 		theStudent.setGroupName(newGroupName);
 		theStudent.setClassName(newClassName);
 		theStudent.setEmail(newEmail);
+		
+	}
+	
+	public static String getStudentCurrentTaskName(String studentName) {
+		String currentTask = "N/A";
+		Student theStudent = students.get(studentName);
+		if (theStudent.getCurrentTask().isPresent()) 
+			currentTask = theStudent.getCurrentTask().get().getName();
+		return currentTask;
 		
 	}
 	
@@ -377,6 +384,7 @@ public class Groupz {
 				group.getMembers().forEach((studentName, student) -> {
 					JSONObject studentJsonObject = new JSONObject();
 					JSONArray studentTasksJsonArray = new JSONArray();
+					String email = (String) student.getEmail();
 					
 					student.getTasks().forEach((taskName, task) -> {
 						JSONObject taskJsonObject = new JSONObject();
@@ -389,6 +397,7 @@ public class Groupz {
 					});
 					
 					studentJsonObject.put("name", studentName);
+					studentJsonObject.put("email", email);
 					studentJsonObject.put("tasks", studentTasksJsonArray);
 					membersJsonArray.add(studentJsonObject);
 					
