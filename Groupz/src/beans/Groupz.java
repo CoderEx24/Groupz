@@ -35,7 +35,7 @@ public class Groupz {
 	private static HashMap<String, Class> classes;
 	private static Optional<Class> currentClass;
 	private static ObservableList<String> studentsTableList;
-	private static List<String> classesList;
+	private static ObservableList<String> classesList;
 	private static String email;
 	private static String password;
 	
@@ -47,7 +47,7 @@ public class Groupz {
 		groups = new HashMap<String, Group>();
 		classes = new HashMap<String, Class>();
 		studentsTableList = null;
-		classesList = new LinkedList<String>();
+		classesList = FXCollections.observableArrayList();
 		currentClass = Optional.empty();
 		
 		if (!dataFolder.exists()) {
@@ -124,7 +124,7 @@ public class Groupz {
 		return true;
 	}
 	
-	public static List<String> getClasses() {
+	public static ObservableList<String> getClasses() {
 		return classesList;
 		
 	}
@@ -187,7 +187,8 @@ public class Groupz {
 		groups.get(groupName).addMember(newStudent);
 		students.put(studentName, newStudent);
 		currentClass.ifPresent(val -> {
-			if (val.getName().equals(groupName))
+			System.out.println("Has a current class");
+			if (val.getName().equals(className))
 				studentsTableList.add("" + newStudent);
 			
 		});
