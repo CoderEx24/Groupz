@@ -1,15 +1,11 @@
 package application;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import beans.*;
-import beans.Class;
+import beans.Groupz;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -28,10 +24,10 @@ public class EditStudentController {
     private ListView<String> tasksList;
     
     @FXML
-    private ChoiceBox<String> classField;
+    private ComboBox<String> classField;
 
     @FXML
-    private ChoiceBox<String> groupField;
+    private ComboBox<String> groupField;
 
     @FXML
     void onSave(ActionEvent event) {
@@ -46,8 +42,14 @@ public class EditStudentController {
     }
     
     @FXML
+    void onClassChange(ActionEvent evt) {
+    	groupField.setItems(FXCollections.observableArrayList(Groupz.getGroupsOfClass(classField.getSelectionModel().getSelectedItem())));
+    	
+    }
+    
+    @FXML
     void initialize() {
-    	classField.setItems(FXCollections.observableArrayList(Groupz.getClasses()));
+    	classField.setItems(Groupz.getClasses());
     	
     }
     

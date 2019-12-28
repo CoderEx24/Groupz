@@ -209,6 +209,7 @@ public class MainController {
     		dig.setScene(scene);
     		dig.setTitle("Groupz - add a task");
     		dig.show();
+    		mainTable.refresh();
 
     	} catch (Exception e) {
     		e.printStackTrace();
@@ -259,7 +260,7 @@ public class MainController {
     		dig.setTitle("Groupz - Edit a student");
     		dig.setScene(scene);
     		dig.show();
-    		
+    		mainTable.refresh();    		
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -339,7 +340,7 @@ public class MainController {
     	confirm.setHeaderText("Delete a class");
     	confirm.setContentText("Are you sure that you want to delete class " + Groupz.getCurrentClass() + " entirely?");
     	ButtonType result = confirm.showAndWait().orElse(null);
-    	if (result.equals(ButtonType.YES)) {
+    	if (result.equals(ButtonType.OK)) {
     		Groupz.deleteClass(Groupz.getCurrentClass());
     		classesShowComboBox.getSelectionModel().select(0);
     	

@@ -1,5 +1,6 @@
 package application;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -51,6 +52,8 @@ public class EditGroupController {
     
     @FXML
     void initialize() {
+    	groupNameField.setDisable(true);
+    	
     	members = FXCollections.observableArrayList();
     	tasks = FXCollections.observableArrayList();
     	
@@ -67,7 +70,15 @@ public class EditGroupController {
     	Optional<String> choice = choiceDig.showAndWait();
     	choice.ifPresent(val -> {
     		if (val.equals("Student")) {
-    			ChoiceDialog<String> studentChoiceDialog = new ChoiceDialog<>("", Groupz.getStudentsOfClass(Groupz.getCurrentClass()));
+    			List<String> listOfStudents = Groupz.getStudentsOfClass(Groupz.getCurrentClass());
+    			for (Iterator<String> iter = listOfStudents.iterator(); iter.hasNext(); ) {
+    				String name = iter.next();
+    				if (members.contains(name))
+    					iter.remove();
+    				
+    			}
+    			
+    			ChoiceDialog<String> studentChoiceDialog = new ChoiceDialog<>("", listOfStudents);
     			studentChoiceDialog.setTitle("Groupz");
     			studentChoiceDialog.setHeaderText("Choose a student to add");
     			Optional<String> student = studentChoiceDialog.showAndWait();
@@ -109,21 +120,13 @@ public class EditGroupController {
     		tasksList.getSelectionModel().clearSelection();
     
     	} else if (selectedStudent != null) {
-    		List<String> otherGroups = Groupz.getGroupsOfClass(Groupz.getCurrentClass());
-    		otherGroups.remove(theGroup);
-    		if (otherGroups.size() == 0) {
-    			
-    			return;
-    		}
-    		ChoiceDialog<String> otherGroupsDialog = new ChoiceDialog<>("", otherGroups);
-    		otherGroupsDialog.setTitle("Groupz");
-    		otherGroupsDialog.setHeaderText("Select a group to move " + selectedStudent + " to.");
-    		Optional<String> result = otherGroupsDialog.showAndWait();
-    		result.ifPresent(val -> Groupz.addStudentToGroup(selectedStudent, val));
     		
-    	} else if (selectedTask != null)
+    		
+    	} else if (selectedTask != null) {
     		Groupz.deleteTaskFromGroup(theGroup, selectedTask);
-    	
+    		tasksList.getItems().remove(selectedTask);
+    		
+    	}
     }
 
 //    @FXML
@@ -141,6 +144,7 @@ public class EditGroupController {
 //
     public void setGroup(String g) {
     	theGroup = g;
+    	groupNameField.setText(theGroup);
     	members.setAll(Groupz.getMembersOfGroup(theGroup));
     	tasks.setAll(Groupz.getTasksOfGroup(theGroup));
     	

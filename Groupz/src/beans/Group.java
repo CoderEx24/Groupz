@@ -7,14 +7,14 @@ public class Group {
 	
 	private String name;
 	private String className;
-	private HashMap<String, Student> memebers;
+	private HashMap<String, Student> members;
 	private HashMap<String, Task> tasks;
 	private Optional<Task> currentTask;
 	
 	public Group() {
 		name = null;
 		className = null;
-		memebers = new HashMap<String, Student>();
+		members = new HashMap<String, Student>();
 		tasks = new HashMap<String, Task>();
 		currentTask = Optional.empty();
 		
@@ -23,7 +23,7 @@ public class Group {
 	public Group(String n, String c) {
 		name = n;
 		className = c;
-		memebers = new HashMap<String, Student>();
+		members = new HashMap<String, Student>();
 		tasks = new HashMap<String, Task>();
 		currentTask = Optional.empty();
 		
@@ -56,7 +56,7 @@ public class Group {
 	}
 	
 	public Student getMember(String val) {
-		return memebers.getOrDefault(val, null);
+		return members.getOrDefault(val, null);
 		
 	}
 	
@@ -75,7 +75,7 @@ public class Group {
 	}
 	
 	public HashMap<String, Student> getMembers() {
-		return memebers;
+		return members;
 		
 	}
 	
@@ -85,7 +85,7 @@ public class Group {
 	}
 	
 	public void addMember(Student s) {
-		memebers.put(s.getName(), s);
+		members.put(s.getName(), s);
 		
 	}
 	
@@ -99,7 +99,7 @@ public class Group {
 	}
 	
 	public void removeMember(Student val) {
-		memebers.remove(val.getName());
+		members.remove(val.getName());
 		
 	}
 	

@@ -1,6 +1,7 @@
 package beans;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -124,6 +125,7 @@ public class Groupz {
 	}
 	
 	public static ObservableList<String> getClasses() {
+		System.out.println("classesList: " + classesList);
 		return classesList;
 		
 	}
@@ -354,8 +356,11 @@ public class Groupz {
 	
 	public static void deleteGroup(String groupName, boolean withStudents) {
 		Group removedGroup = groups.get(groupName);
-		if (withStudents)
-			removedGroup.getMembers().forEach((studentName, ignore) -> deleteStudent(studentName));
+		if (withStudents) {
+			List<String> listOfStudents = new LinkedList<String>(removedGroup.getMembers().keySet());
+			listOfStudents.forEach(studentName -> deleteStudent(studentName));
+			
+		}
 		classes.get(removedGroup.getClassName()).removeGroup(removedGroup, withStudents);
 		groups.remove(groupName);
 		
@@ -363,8 +368,10 @@ public class Groupz {
 	
 	public static void deleteClass(String className) {
 		Class removedClass = classes.get(className);
-		removedClass.getGroups().forEach((groupName, ignore) -> deleteGroup(groupName, true));
+		List<String> listOfGroups = new LinkedList<String>(removedClass.getGroups().keySet());
+		listOfGroups.forEach(groupName -> deleteGroup(groupName, true));
 		classes.remove(className);
+		classesList.remove(className);
 		
 	}
 	
