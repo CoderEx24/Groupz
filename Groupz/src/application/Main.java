@@ -18,6 +18,13 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
+		try {
+			Thread.sleep(3000);
+			
+		} catch (InterruptedException e) {
+			
+		}
+		
 		Platform.setImplicitExit(false);
 		try {
 			Groupz.init();
