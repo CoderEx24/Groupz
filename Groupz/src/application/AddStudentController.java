@@ -54,7 +54,7 @@ public class AddStudentController {
     
     @FXML
     void initialize() {
-    	classField.setItems(FXCollections.observableArrayList(Groupz.getClasses()));
+    	classField.setItems(Groupz.getClasses());
     	classField.getSelectionModel().select(0);
     	groupField.setItems(FXCollections.observableArrayList(Groupz.getGroupsOfClass(classField.getSelectionModel().getSelectedItem())));
     	

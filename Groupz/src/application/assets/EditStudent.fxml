@@ -35,7 +35,7 @@
       <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <Label text="Tasks" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
       <ListView fx:id="tasksList" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="3" />
-      <ComboBox onAction="#onClassChange" prefHeight="25.0" prefWidth="393.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <ComboBox prefHeight="25.0" prefWidth="443.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <ComboBox fx:id="classField" onAction="#onClassChange" prefHeight="25.0" prefWidth="393.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <ComboBox fx:id="groupField" prefHeight="25.0" prefWidth="443.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
    </children>
 </GridPane>
